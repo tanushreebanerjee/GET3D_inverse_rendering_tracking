@@ -1,1 +1,6 @@
 .DS_Store
+logs
+get3d_release
+render_shapenet_data/blender-2.90.0-linux64
+render_shapenet_data/processed_get3d
+render_shapenet_data/ShapeNetCore.v1
