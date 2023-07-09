@@ -158,6 +158,8 @@ def training_loop(
         torch.distributed.barrier()
     G = dnnlib.util.construct_class_by_name(**G_kwargs, **common_kwargs).train().requires_grad_(False).to(
         device)  # subclass of torch.nn.Module
+    # print("D_kwargs:", D_kwargs)
+    # print("common_kwargs:", common_kwargs)
     D = dnnlib.util.construct_class_by_name(**D_kwargs, **common_kwargs).train().requires_grad_(False).to(
         device)  # subclass of torch.nn.Module
     G_ema = copy.deepcopy(G).eval()  # deepcopy can make sure they are correct.
