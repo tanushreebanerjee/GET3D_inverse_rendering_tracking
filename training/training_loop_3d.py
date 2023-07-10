@@ -158,8 +158,9 @@ def training_loop(
         torch.distributed.barrier()
     G = dnnlib.util.construct_class_by_name(**G_kwargs, **common_kwargs).train().requires_grad_(False).to(
         device)  # subclass of torch.nn.Module
-    # print("D_kwargs:", D_kwargs)
-    # print("common_kwargs:", common_kwargs)
+    # print with D_kwargs with 4 indent
+    # print('D_kwargs: ', D_kwargs)
+    # print("common_kwargs: ", common_kwargs)
     D = dnnlib.util.construct_class_by_name(**D_kwargs, **common_kwargs).train().requires_grad_(False).to(
         device)  # subclass of torch.nn.Module
     G_ema = copy.deepcopy(G).eval()  # deepcopy can make sure they are correct.
@@ -238,11 +239,11 @@ def training_loop(
     stats_tfevents = None
     if rank == 0:
         stats_jsonl = open(os.path.join(run_dir, 'stats.jsonl'), 'wt')
-        try:
-            import torch.utils.tensorboard as tensorboard
-            stats_tfevents = tensorboard.SummaryWriter(run_dir)
-        except ImportError as err:
-            print('Skipping tfevents export:', err)
+        # try:
+        #     import torch.utils.tensorboard as tensorboard
+        #     stats_tfevents = tensorboard.SummaryWriter(run_dir)
+        # except ImportError as err:
+        #     print('Skipping tfevents export:', err)
 
     if rank == 0:
         print(f'Training for {total_kimg} kimg...')
